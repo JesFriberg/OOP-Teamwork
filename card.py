@@ -47,12 +47,4 @@ Currently loaned by: {self.loaned}"""
         return self.loaned
 
 
-def main():
-
-    kortti = Card()
-    kortti.set_price(15)
-    kortti.set_owner("Jesse")
-    kortti.set_loaned_yes("Joonatan")
-
-    print(kortti)
 
