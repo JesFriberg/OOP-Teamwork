@@ -4,7 +4,7 @@
 
 class Card:
     def __init__(self):
-        self.price = ""
+        self.price = 0
         self.id = 0
         self.owner = ""
         self.loaned = "Nobody"
@@ -12,7 +12,7 @@ class Card:
     def __str__(self):
         return f"""\nCard with an ID {self.id}
 Original owner: {self.owner}        
-Price: {self.owner}
+Price: {self.price} €
 Currently loaned by: {self.loaned}"""
 
     def show_card(self):
@@ -45,3 +45,14 @@ Currently loaned by: {self.loaned}"""
 
     def get_loaned(self):
         return self.loaned
+
+
+def main():
+
+    kortti = Card()
+    kortti.set_price(15)
+    kortti.set_owner("Jesse")
+    kortti.set_loaned_yes("Joonatan")
+
+    print(kortti)
+
