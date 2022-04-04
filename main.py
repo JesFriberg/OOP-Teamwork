@@ -63,11 +63,70 @@ def mtg_card_create(empty_card, name):
                 card.set_legality_no()
             break
     
+
+def pokemon_card_create(empty_card, name):
+    card = basic_card_create(empty_card, name)
+    type_list = ["Pokémon", "Energy", "Trainer"]
+    print("Select the number correspoding the correct card type")
+    print("Pokémon   Energy     Trainer")
+    print("  1          2          3")
+    while True:
+        answ = input()
+        try:
+            answ = int(answ)
+            if answ not in [1,2,3]:
+                print("Please enter a valid answer")
+                continue
+            else:
+                break
+        except:
+            print("Please enter a valid number")
+            continue
+
+    card.set_card_type(type_list[answ-1])
+
+    typing_list = ["Grass", "Fire", "Water", "Lightning", "Fighting", "Psychic", "Colorless", "Darkness", "Metal", "Dragon", "Fairy"]
+    print("Select the number correspoding the correct typing for the card")
+    print("Grass    Fire    Water    Lightning    Fighting    Psychic    Colorless    Darkness    Metal    Dragon    Fairy")
+    print("  1       2        3          4            5          6           7           8          9        10        11")
+    while True:
+        answ = input()
+        try:
+            answ = int(answ)
+            if answ not in [1,2,3,4,5,6,7,8,9,10,11]:
+                print("Please enter a valid answer")
+                continue
+            else:
+                break
+        except:
+            print("Please enter a valid number")
+            continue
+
+    card.set_typing(typing_list[answ-1])
+
+    if card.get_card_type() == "Pokémon":
+        while True:
+            hp = input("Enter the pokémons hp as an integer: ")
+            try:
+                hp = int(hp)
+                break
+            except ValueError:
+                print("Please enter a valid integer")
+                continue
+        card.set_hp(hp)
+    else:
+        card.set_hp("None")
+
     print(card)
+        
+
+
     
 latest_id = 0 
-kortti = Mtg_card()
-mtg_card_create(kortti, "Jesse")
+kortti = Pokemon_card()
+#mtg_card_create(kortti, "Jesse")
+pokemon_card_create(kortti, "Jesse")
+
 
 
 
