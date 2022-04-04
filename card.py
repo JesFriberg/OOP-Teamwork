@@ -85,3 +85,48 @@ Currently loaned by: {self.loaned}"""
     def get_legality(self):
         return self.comp_legality
 
+
+class Pokemon_card(Card):
+
+    def __init__(self):
+        self.card_type = ""
+        self.typing = ""
+        self.hp = 0
+        Card.__init__(self)
+
+    def __str__(self):
+        return f"""\nPokémon card with an ID {self.id}
+Original owner: {self.owner}        
+Price: {self.price} €
+Card type: {self.card_type}
+Card typing: {self.typing}
+HP of the card: {self.hp}
+Currently loaned by: {self.loaned}"""
+
+    def set_card_type(self, type):
+        self.card_type = type
+
+    def set_typing(self, typing):
+        self.typing = typing
+
+    def set_hp(self, hp):
+        self.hp = hp
+
+    def get_card_type(self):
+        return self.card_type
+
+    def get_typing(self):
+        return self.typing
+
+    def get_hp(self):
+        return self.hp
+
+
+"""def main():
+    kortti = 
+
+    kortti.set_loaned_yes("Mutsis")
+    kortti.set_owner("Meitsi")
+    print(kortti)
+
+main()"""
