@@ -98,7 +98,7 @@ class Pokemon_card(Card):
         return f"""\nPokémon card with an ID {self.id}
 Original owner: {self.owner}        
 Price: {self.price} €
-Card type: {self.card_type}
+Card type: {self.card_type} card
 Card typing: {self.typing}
 HP of the card: {self.hp}
 Currently loaned by: {self.loaned}"""
