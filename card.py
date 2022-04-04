@@ -156,4 +156,3 @@ Currently loaned by: {self.loaned}"""
 
     def get_grade(self):
         return self.grade
-
