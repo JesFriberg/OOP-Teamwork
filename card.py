@@ -47,4 +47,41 @@ Currently loaned by: {self.loaned}"""
         return self.loaned
 
 
+class Mtg_card(Card):
+
+    def __init__(self):
+        self.type = ""
+        self.color = ""
+        self.comp_legality = ""
+        Card.__init__(self)
+
+    def __str__(self):
+        return f"""\nMagic the Gathering card with an ID {self.id}
+Original owner: {self.owner}        
+Price: {self.price} €
+Card type: {self.type}
+Card color: {self.color}
+Is the card tournament legal: {self.comp_legality}
+Currently loaned by: {self.loaned}"""
+
+    def set_type(self, type):
+        self.type = type
+
+    def set_color(self, color):
+        self.color = color
+
+    def set_legality_yes(self):
+        self.comp_legality = "Yes"
+
+    def set_legality_no(self):
+        self.comp_legality = "No"
+
+    def get_type(self):
+        return self.type
+
+    def get_color(self):
+        return self.color
+
+    def get_legality(self):
+        return self.comp_legality
 

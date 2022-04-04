@@ -41,17 +41,3 @@ Cards {self.name} has put up for trading: {self.cards_for_trade}  """
         return self.loaned_cards
 
 
-def main():
-    
-    jesse = Player()
-    jesse.set_name("Jesse")
-    jesse.add_card_owned("Holo charizard")
-    jesse.add_card_owned("Pikachu")
-    jesse.add_card_loaned("Joonatan", "Full art Krenko")
-    owned = jesse.get_owned_cards()
-    jesse.add_card_for_trade(owned[1])
-
-    print(jesse)
-
-
-main()
