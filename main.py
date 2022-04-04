@@ -85,7 +85,8 @@ def pokemon_card_create(empty_card, name):
 
     card.set_card_type(type_list[answ-1])
 
-    typing_list = ["Grass", "Fire", "Water", "Lightning", "Fighting", "Psychic", "Colorless", "Darkness", "Metal", "Dragon", "Fairy"]
+    typing_list = ["Grass", "Fire", "Water", "Lightning", "Fighting", 
+    "Psychic", "Colorless", "Darkness", "Metal", "Dragon", "Fairy"]
     print("Select the number correspoding the correct typing for the card")
     print("Grass    Fire    Water    Lightning    Fighting    Psychic    Colorless    Darkness    Metal    Dragon    Fairy")
     print("  1       2        3          4            5          6           7           8          9        10        11")
@@ -140,7 +141,8 @@ def yugioh_card_create(empty_card, name):
 
     card.set_type(type_list[answ-1])
 
-    rarity_list = ["Common", "Rare", "Super Rare", "Holofoil Rare", "Ultra Rare", "Ultimate Rare", "Secret Rare", "Parallel Rare", "Ghost Rare", "Gold Ultra Rare"]
+    rarity_list = ["Common", "Rare", "Super Rare", "Holofoil Rare", "Ultra Rare",
+    "Ultimate Rare", "Secret Rare", "Parallel Rare", "Ghost Rare", "Gold Ultra Rare"]
     print("Select the number correspoding the correct typing for the card")
     print("Common  Rare  Super Rare  Holofoil Rare  Ultra Rare   Ultimate Rare  Secret Rare  Parallel Rare  Ghost Rare  Gold Ultra Rare")
     print("  1       2       3             4            5              6             7              8           9              10")
