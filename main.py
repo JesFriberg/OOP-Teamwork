@@ -119,13 +119,67 @@ def pokemon_card_create(empty_card, name):
 
     print(card)
         
+def yugioh_card_create(empty_card, name):
+    card = basic_card_create(empty_card, name)
+    type_list = ["Monster", "Spell", "Trap"]
+    print("Select the number correspoding the correct card type")
+    print("Monster   Spell   Trap")
+    print("  1         2       3")
+    while True:
+        answ = input()
+        try:
+            answ = int(answ)
+            if answ not in [1,2,3]:
+                print("Please enter a valid answer")
+                continue
+            else:
+                break
+        except:
+            print("Please enter a valid number")
+            continue
 
+    card.set_type(type_list[answ-1])
+
+    rarity_list = ["Common", "Rare", "Super Rare", "Holofoil Rare", "Ultra Rare", "Ultimate Rare", "Secret Rare", "Parallel Rare", "Ghost Rare", "Gold Ultra Rare"]
+    print("Select the number correspoding the correct typing for the card")
+    print("Common  Rare  Super Rare  Holofoil Rare  Ultra Rare   Ultimate Rare  Secret Rare  Parallel Rare  Ghost Rare  Gold Ultra Rare")
+    print("  1       2       3             4            5              6             7              8           9              10")
+    while True:
+        answ = input()
+        try:
+            answ = int(answ)
+            if answ not in [1,2,3,4,5,6,7,8,9,10]:
+                print("Please enter a valid answer")
+                continue
+            else:
+                break
+        except:
+            print("Please enter a valid number")
+            continue
+
+    card.set_rarity(rarity_list[answ-1])
+
+    while True:
+        grade = input("Enter the grade of the card from 1 to 10 as an integer: ")
+        try:
+            grade = int(grade)
+            if grade not in [1,2,3,4,5,6,7,8,9,10]:
+                print("Please enter a valid grade")
+                continue
+            else:
+                card.set_grade(grade)
+                break
+        except ValueError:
+            continue
+
+    print(card)
 
     
 latest_id = 0 
-kortti = Pokemon_card()
+kortti = Yugioh_card()
 #mtg_card_create(kortti, "Jesse")
-pokemon_card_create(kortti, "Jesse")
+#pokemon_card_create(kortti, "Jesse")
+yugioh_card_create(kortti, "Jesse")
 
 
 
