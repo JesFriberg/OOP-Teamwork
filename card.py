@@ -122,11 +122,38 @@ Currently loaned by: {self.loaned}"""
         return self.hp
 
 
-"""def main():
-    kortti = 
+class Yugioh_card(Card):
 
-    kortti.set_loaned_yes("Mutsis")
-    kortti.set_owner("Meitsi")
-    print(kortti)
+    def __init__(self):
+        self.type = ""
+        self.rarity = ""
+        self.grade = 0
+        Card.__init__(self)
 
-main()"""
+    def __str__(self):
+        return f"""\nYu-Gi-Oh card with an ID {self.id}
+Original owner: {self.owner}        
+Price: {self.price} €
+Card type: {self.type}
+Card rarity: {self.rarity}
+Card grade: {self.grade}
+Currently loaned by: {self.loaned}"""
+
+    def set_type(self, type):
+        self.type = type
+
+    def set_rarity(self, rarity):
+        self.rarity = rarity
+
+    def set_grade(self, grade):
+        self.grade = grade
+
+    def get_type(self):
+        return self.type
+
+    def get_rarity(self):
+        return self.rarity
+
+    def get_grade(self):
+        return self.grade
+
