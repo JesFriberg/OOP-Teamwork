@@ -1,6 +1,6 @@
 # File: card.py
 # Author: Jesse Friberg and Joonatan Silvennoinen
-# Description: Card class
+# Description: Card class and its subclasses
 
 class Card:
     def __init__(self):
