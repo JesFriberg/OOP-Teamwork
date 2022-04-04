@@ -134,7 +134,7 @@ class Yugioh_card(Card):
         return f"""\nYu-Gi-Oh card with an ID {self.id}
 Original owner: {self.owner}        
 Price: {self.price} €
-Card type: {self.type}
+Card type: {self.type} card
 Card rarity: {self.rarity}
 Card grade: {self.grade}
 Currently loaned by: {self.loaned}"""
