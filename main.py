@@ -191,6 +191,70 @@ player_dic = {}
 latest_id = 0 
 kortti = Yugioh_card()
 
+def int_check(num):
+    while True:
+        try:
+            num = int(num)
+            return num
+        except ValueError:
+            print("Please enter a valid number:")
+            num = input()
+            continue
+
+def player_choose():
+    for count, player in enumerate(player_dic.keys()):
+        print(f"{count+1}. {player}")
+    keys = list(player_dic.keys())   
+    while True:
+        answ = input("Choose which player you are: ")
+        answ = int_check(answ)
+        if answ <= count+1:
+            return player_dic[keys[answ-1]].get_name()
+        else:
+            print("Please enter an available option")
+            continue 
+        
+            
+def main():
+    #On startup
+    print("Greetings")
+    # * Tähän ohje kuinka vain numeroilla liikut * 
+
+
+    print("Do you want to create a new player or choose an existing one?")
+    print("1. New player")
+    print("2. Existing player")
+    while True:
+        answ = input()
+        answ = int_check(answ)
+        if answ in [1,2]:
+            if answ == 1:
+                player_create()
+                break
+            elif answ == 2:
+                break
+        else:
+            print("Please enter an available option")
+            continue
+
+    current_player = player_choose()
+    print(current_player)
+
+    
+
+main()
+        
+
+                
+
+
+    #Choose which player you are
+    
+
+
+
+
+
 
 
 
