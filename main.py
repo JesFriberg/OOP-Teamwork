@@ -5,7 +5,18 @@
 from card import Card, Mtg_card, Pokemon_card, Yugioh_card
 from player import Player
 
-
+def player_create():
+    global player_dic
+    while True:
+        name = input("Enter your username: ").capitalize()
+        if name in  player_dic:
+            print("That username already exists, please choose another one!")
+        else:
+            break
+    player_dic[name] = Player()  
+    player_dic[name].set_name(name)
+    
+    
 
 def basic_card_create(card, name):
     while True:
@@ -176,12 +187,10 @@ def yugioh_card_create(empty_card, name):
 
     print(card)
 
-    
+player_dic = {}
 latest_id = 0 
 kortti = Yugioh_card()
-#mtg_card_create(kortti, "Jesse")
-#pokemon_card_create(kortti, "Jesse")
-yugioh_card_create(kortti, "Jesse")
+
 
 
 
