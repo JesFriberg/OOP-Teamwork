@@ -218,9 +218,7 @@ def player_choose():
 def main():
     #On startup
     print("Greetings")
-    # * Tähän ohje kuinka vain numeroilla liikut * 
-
-
+    # * placeholder for instructions later on * 
     print("Do you want to create a new player or choose an existing one?")
     print("1. New player")
     print("2. Existing player")
@@ -236,20 +234,21 @@ def main():
         else:
             print("Please enter an available option")
             continue
-
+    
+    #User gets to choose which registered player they want to use 
     current_player = player_choose()
-    print(current_player)
+    print(f"Current player: {current_player}")
 
     
 
 main()
-        
+
+    
 
                 
 
 
-    #Choose which player you are
-    
+
 
 
 
