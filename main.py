@@ -214,6 +214,34 @@ def player_choose():
             print("Please enter an available option")
             continue 
         
+def main_menu(player):
+    print(f"Greetings {player}, what would you like to do?")
+    print("1. Add or remove a card")
+    print("2. Loan a card")
+    print("3. View collections")
+    print("4. Quit ")
+    while True:
+        answ = input()
+        answ = int_check(answ)
+        if answ in [1,2,3,4]:
+            if answ == 1:
+                #add a card
+                break
+            elif answ == 2:
+                #loan a card
+                break
+            elif answ == 3:
+                #view all card collections
+                break
+            elif answ == 4:
+                #Quit button
+                print("Goodbye!")
+                exit()
+        else:
+            print("Please enter an available option")
+            continue
+    
+
             
 def main():
     #On startup
@@ -237,7 +265,11 @@ def main():
     
     #User gets to choose which registered player they want to use 
     current_player = player_choose()
-    print(f"Current player: {current_player}")
+    
+    #The main menu loop where player can navigate everywhere
+    main_menu(current_player)
+    
+    
 
     
 
