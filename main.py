@@ -216,6 +216,8 @@ def player_choose():
             continue 
         
 def main_menu(user):
+    #The main hub where user can access all the features
+    # *placeholder, this will most likely become a loop*
     print(f"\nGreetings {user}, what would you like to do?")
     print("1. Add or remove a card")
     print("2. Loan a card or add a card up for loaning")
@@ -299,6 +301,7 @@ def add_card(user):
             continue
         
 def view_collections(current_user):
+    #Choose a player and print out each card in that players owned_cards list
     print("\nWhich player's collection would you like to view?")
     chosen_player = player_choose()
     
