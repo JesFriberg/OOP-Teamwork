@@ -19,6 +19,7 @@ def player_create():
     
 
 def basic_card_create(card, name):
+    card_name = input("Enter the name of the card: ").capitalize()
     while True:
         price = input("Enter the price of the card as an integer: ")
         try:
@@ -28,7 +29,7 @@ def basic_card_create(card, name):
             print("Please enter a valid integer")
             continue
     card.set_price(price)
-    
+    card.set_name(card_name)
     global latest_id
     card.set_id(latest_id+1)
     latest_id +=1
@@ -59,7 +60,7 @@ def mtg_card_create(empty_card, name):
 
     card.set_type(type_list[answ-1])
     
-    color = input("Enter the color of the card (Red, Blue, Green, Black, White or Colorless, or any combination of them): ")
+    color = input("Enter the color of the card (Red, Blue, Green, Black, White or Colorless, or any combination of them): ").capitalize()
     card.set_color(color)
 
     while True:
