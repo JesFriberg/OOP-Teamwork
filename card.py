@@ -8,6 +8,7 @@ class Card:
         self.id = 0
         self.owner = ""
         self.loaned = "Nobody"
+        self.name = ""
 
     def __str__(self):
         return f"""\nCard with an ID {self.id}
@@ -26,6 +27,9 @@ Currently loaned by: {self.loaned}"""
 
     def set_owner(self, own):
         self.owner = own
+        
+    def set_name(self, name):
+        self.name = name
 
     #Loaner will be self.name of the player who loans the card as the argument in the main function 
     def set_loaned_yes(self, loaner):
@@ -45,6 +49,9 @@ Currently loaned by: {self.loaned}"""
 
     def get_loaned(self):
         return self.loaned
+    
+    def get_name(self):
+        return self.name
 
 
 class Mtg_card(Card):
@@ -57,6 +64,7 @@ class Mtg_card(Card):
 
     def __str__(self):
         return f"""\nMagic the Gathering card with an ID {self.id}
+Name: {self.name}
 Original owner: {self.owner}        
 Price: {self.price} €
 Card type: {self.type}
@@ -96,6 +104,7 @@ class Pokemon_card(Card):
 
     def __str__(self):
         return f"""\nPokémon card with an ID {self.id}
+Name: {self.name}
 Original owner: {self.owner}        
 Price: {self.price} €
 Card type: {self.card_type} card
@@ -132,6 +141,7 @@ class Yugioh_card(Card):
 
     def __str__(self):
         return f"""\nYu-Gi-Oh card with an ID {self.id}
+Name: {self.name}
 Original owner: {self.owner}        
 Price: {self.price} €
 Card type: {self.type} card
