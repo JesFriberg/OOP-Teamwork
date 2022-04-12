@@ -207,7 +207,7 @@ def player_choose():
         print(f"{count+1}. {player}")
     keys = list(player_dic.keys())   
     while True:
-        answ = input("Choose which player you are: ")
+        answ = input("Choose a player: ")
         answ = int_check(answ)
         if answ <= count+1:
             return player_dic[keys[answ-1]].get_name()
@@ -215,8 +215,8 @@ def player_choose():
             print("Please enter an available option")
             continue 
         
-def main_menu(player):
-    print(f"\nGreetings {player}, what would you like to do?")
+def main_menu(user):
+    print(f"\nGreetings {user}, what would you like to do?")
     print("1. Add or remove a card")
     print("2. Loan a card or add a card up for loaning")
     print("3. View collections")
@@ -227,13 +227,14 @@ def main_menu(player):
         if answ in [1,2,3,4]:
             if answ == 1:
                 #add a card
-                add_card(player)
+                add_card(user)
                 break
             elif answ == 2:
                 #loan a card
                 break
             elif answ == 3:
                 #view all card collections
+                view_collections(user)
                 break
             elif answ == 4:
                 #Quit button
@@ -271,9 +272,9 @@ def add_card(user):
             print("Please enter an available option")
             continue
     
+    #Add the created card to the user and print it out
     player_dic[user].add_card_owned(card)
-
-    print(player_dic[user].get_owned_cards()[0])
+    print(player_dic[user].get_owned_cards()[len(player_dic[user].get_owned_cards())-1])
     
     print("\nWould you like to add another card?")
     print("1. Yes, add another card")
@@ -287,6 +288,7 @@ def add_card(user):
                 add_card(user)
                 break
             elif answ == 2:
+                main_menu(user)
                 break
             elif answ == 3:
                 #Quit button
@@ -295,7 +297,36 @@ def add_card(user):
         else:
             print("Please enter an available option")
             continue
+        
+def view_collections(current_user):
+    print("\nWhich player's collection would you like to view?")
+    chosen_player = player_choose()
     
+    print(f"\n{chosen_player}'s card collection: ")
+    for i in player_dic[chosen_player].get_owned_cards():
+        print(i)
+        
+    print("\nWould you like to view another player's collection?")
+    print("1. Yes, view another collection")
+    print("2. No, return to main menu")
+    print("3. Quit")
+    while True:
+        answ = input()
+        answ = int_check(answ)
+        if answ in [1,2,3]:
+            if answ == 1:
+                view_collections()
+                break
+            elif answ == 2:
+                main_menu(current_user)
+                break
+            elif answ == 3:
+                #Quit button
+                print("Goodbye!")
+                exit()
+        else:
+            print("Please enter an available option")
+            continue
 
             
 def main():
