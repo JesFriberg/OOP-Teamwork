@@ -74,6 +74,7 @@ def mtg_card_create(empty_card, name):
                 card.set_legality_no()
             break
     
+    return card
 
 def pokemon_card_create(empty_card, name):
     card = basic_card_create(empty_card, name)
@@ -129,7 +130,7 @@ def pokemon_card_create(empty_card, name):
     else:
         card.set_hp("None")
 
-    print(card)
+    return card
         
 def yugioh_card_create(empty_card, name):
     card = basic_card_create(empty_card, name)
@@ -185,11 +186,10 @@ def yugioh_card_create(empty_card, name):
         except ValueError:
             continue
 
-    print(card)
+    return card
 
 player_dic = {}
-latest_id = 0 
-kortti = Yugioh_card()
+latest_id = 0
 
 def int_check(num):
     while True:
@@ -219,13 +219,14 @@ def main_menu(player):
     print("1. Add or remove a card")
     print("2. Loan a card")
     print("3. View collections")
-    print("4. Quit ")
+    print("4. Quit")
     while True:
         answ = input()
         answ = int_check(answ)
         if answ in [1,2,3,4]:
             if answ == 1:
                 #add a card
+                add_card(player)
                 break
             elif answ == 2:
                 #loan a card
@@ -241,6 +242,38 @@ def main_menu(player):
             print("Please enter an available option")
             continue
     
+def add_card(user):
+    print("What kind of card would you like to add?")
+    print("1. Magic The Gathering")
+    print("2. Pokémon")
+    print("3. Yu-Gi-Oh")
+    while True:
+        answ = input()
+        answ = int_check(answ)
+        if answ in [1,2,3]:
+            if answ == 1:
+                #create mtg card
+                card = Mtg_card()
+                card = mtg_card_create(card, user)
+                break
+            elif answ == 2:
+                #create pokemon card
+                card = Pokemon_card()
+                card = pokemon_card_create(card, user)
+                break
+            elif answ == 3:
+                #create yugioh card
+                card = Yugioh_card()
+                card = yugioh_card_create(card, user)
+                break
+        else:
+            print("Please enter an available option")
+            continue
+    
+    player_dic[user].add_card_owned(card)
+
+    print(player_dic[user].get_owned_cards()[0])
+    
 
             
 def main():
@@ -250,15 +283,22 @@ def main():
     print("Do you want to create a new player or choose an existing one?")
     print("1. New player")
     print("2. Existing player")
+    print("3. Quit")
     while True:
         answ = input()
         answ = int_check(answ)
-        if answ in [1,2]:
+        if answ in [1,2,3]:
             if answ == 1:
                 player_create()
                 break
             elif answ == 2:
-                break
+                if len(player_dic) == 0:
+                    print("No existing players, choose another option: ")
+                    continue
+                else:
+                    break
+            elif answ == 3:
+                exit()
         else:
             print("Please enter an available option")
             continue
