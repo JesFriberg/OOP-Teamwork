@@ -19,7 +19,7 @@ def player_create():
     
 
 def basic_card_create(card, name):
-    card_name = input("Enter the name of the card: ").capitalize()
+    card_name = input("\nEnter the name of the card: ").capitalize()
     while True:
         price = input("Enter the price of the card as an integer: ")
         try:
@@ -216,9 +216,9 @@ def player_choose():
             continue 
         
 def main_menu(player):
-    print(f"Greetings {player}, what would you like to do?")
+    print(f"\nGreetings {player}, what would you like to do?")
     print("1. Add or remove a card")
-    print("2. Loan a card")
+    print("2. Loan a card or add a card up for loaning")
     print("3. View collections")
     print("4. Quit")
     while True:
@@ -244,7 +244,7 @@ def main_menu(player):
             continue
     
 def add_card(user):
-    print("What kind of card would you like to add?")
+    print("\nWhat kind of card would you like to add?")
     print("1. Magic The Gathering")
     print("2. Pokémon")
     print("3. Yu-Gi-Oh")
@@ -274,6 +274,27 @@ def add_card(user):
     player_dic[user].add_card_owned(card)
 
     print(player_dic[user].get_owned_cards()[0])
+    
+    print("\nWould you like to add another card?")
+    print("1. Yes, add another card")
+    print("2. No, return to main menu")
+    print("3. Quit")
+    while True:
+        answ = input()
+        answ = int_check(answ)
+        if answ in [1,2,3]:
+            if answ == 1:
+                add_card(user)
+                break
+            elif answ == 2:
+                break
+            elif answ == 3:
+                #Quit button
+                print("Goodbye!")
+                exit()
+        else:
+            print("Please enter an available option")
+            continue
     
 
             
