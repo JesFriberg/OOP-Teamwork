@@ -9,6 +9,7 @@ class Card:
         self.owner = ""
         self.loaned = "Nobody"
         self.name = ""
+        self.up_for_loan = "No"
 
     def __str__(self):
         return f"""\nCard with an ID {self.id}
@@ -37,6 +38,9 @@ Currently loaned by: {self.loaned}"""
 
     def set_loaned_no(self):
         self.loaned = "Nobody"
+    
+    def set_up_for_loan(self, yesno):
+        self.up_for_loan = yesno
 
     def get_price(self):
         return self.price
@@ -53,6 +57,8 @@ Currently loaned by: {self.loaned}"""
     def get_name(self):
         return self.name
 
+    def get_up_for_loan(self):
+        return self.up_for_loan
 
 class Mtg_card(Card):
 
