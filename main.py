@@ -234,12 +234,14 @@ def main_menu(user):
                     break
                 elif answ == 2:
                     #loan a card
+                    loan_card(user)
                     break
                 elif answ == 3:
                     #view all card collections
                     view_collections()
                     break
                 elif answ == 4:
+                    #returns back to the beginning, allowing the change or creation  of players
                     return
                 elif answ == 5:
                     #Quit button
@@ -277,10 +279,25 @@ def add_card(user):
             print("Please enter an available option")
             continue
     
-    #Add the created card to the user and print it out
+    #Add the created card to the user 
     player_dic[user].add_card_owned(card)
-    print(player_dic[user].get_owned_cards()[len(player_dic[user].get_owned_cards())-1])
     
+
+    #Ask the user if the card is up for loaning
+    while True:
+        legal = input("\nDo you want to put this card up for loaning?: ").capitalize()
+        if legal not in ["Yes", "No"]:
+            print("Please enter yes or no")
+            continue
+        else:
+            if legal == "Yes":
+                card.set_up_for_loan("Yes")
+                player_dic[user].add_card_for_loan(card)
+            break
+
+    #Print the added card out
+    print(player_dic[user].get_owned_cards()[len(player_dic[user].get_owned_cards())-1])
+
     print("\nWould you like to add another card?")
     print("1. Yes, add another card")
     print("2. No, return to main menu")
@@ -307,10 +324,18 @@ def view_collections():
     #Choose a player and print out each card in that players owned_cards list
     print("\nWhich player's collection would you like to view?")
     chosen_player = player_choose()
-    if len(player_dic[chosen_player].get_owned_cards()) > 0:
-        print(f"\n{chosen_player}'s card collection: ") 
+    if len(player_dic[chosen_player].get_owned_cards()) > 0 or len(player_dic[chosen_player].get_loaned_cards()) > 0:
+        print(f"\n{chosen_player}'s card collection: ")
+        if len(player_dic[chosen_player].get_owned_cards()) == 0:
+            print(f"\n{chosen_player} does not currently own any cards")
         for i in player_dic[chosen_player].get_owned_cards():
             print(i)
+
+        print(f"\n{chosen_player}'s loaned cards: ")
+        if len(player_dic[chosen_player].get_loaned_cards()) == 0:
+            print(f"\n{chosen_player} does not currently have any loaned cards")
+        for i in player_dic[chosen_player].get_loaned_cards():
+            print(i)      
     else:
         print(f"\n{chosen_player}'s card collection is empty at the moment.")
         
@@ -335,11 +360,52 @@ def view_collections():
             print("Please enter an available option")
             continue
 
-            
+def loan_card(current_user):  
+    all_cards_for_loan = []  
+    counter = []   
+    #Go trough every players loanable cards list and add them into one single list
+    for i in player_dic:
+        if player_dic[i].get_name() == current_user:
+            continue
+        else:
+            for i in player_dic[i].get_cards_for_loan():
+                all_cards_for_loan.append(i)   
+    
+    if len(all_cards_for_loan) > 0:
+        print("\nHere are all the cards other players have put up able to be loaned: ")
+    else: 
+        print("\nThere is no cards up for loaning at the moment.")
+        print("Returning to main menu...")
+        return
+
+    for count, card in enumerate(all_cards_for_loan):
+        print(f"\nLoan ID: {count+1} {card}")
+        counter.append(count+1)
+
+    print("\nWhich card would you like to loan?")
+    print("Enter the Loan ID of the desired card or type 0 to return to main menu: ")
+    while True:
+        answ = input()
+        answ = int_check(answ)
+        if answ in counter:
+            #Addes the card to current users loaned cards, removes the card from loanable cards
+            print(f"Adding {all_cards_for_loan[answ-1].get_name()} to your collection...")
+            all_cards_for_loan[answ-1].set_loaned_yes(current_user)
+            player_dic[current_user].add_card_loaned(all_cards_for_loan[answ-1])
+            player_dic[all_cards_for_loan[answ-1].get_owner()].get_cards_for_loan().pop(answ-1)
+            break
+        elif answ == 0:
+            #returns to main menu
+            return 
+        else:
+            print("Please choose a valid option")
+            continue
+
+
 def main():
     while True:
         #On startup
-        print("Greetings")
+        print("\nGreetings")
         # * placeholder for instructions later on * 
         print("Do you want to create a new player or choose an existing one?")
         print("1. New player")

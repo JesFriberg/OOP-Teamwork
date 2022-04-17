@@ -76,6 +76,7 @@ Price: {self.price} €
 Card type: {self.type}
 Card color: {self.color}
 Is the card tournament legal: {self.comp_legality}
+Up for loaning: {self.up_for_loan}
 Currently loaned by: {self.loaned}"""
 
     def set_type(self, type):
@@ -116,6 +117,7 @@ Price: {self.price} €
 Card type: {self.card_type} card
 Card typing: {self.typing}
 HP of the card: {self.hp}
+Up for loaning: {self.up_for_loan}
 Currently loaned by: {self.loaned}"""
 
     def set_card_type(self, type):
@@ -153,6 +155,7 @@ Price: {self.price} €
 Card type: {self.type} card
 Card rarity: {self.rarity}
 Card grade: {self.grade}
+Up for loaning: {self.up_for_loan}
 Currently loaned by: {self.loaned}"""
 
     def set_type(self, type):
