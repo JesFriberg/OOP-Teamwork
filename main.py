@@ -4,6 +4,7 @@
 
 from card import Card, Mtg_card, Pokemon_card, Yugioh_card
 from player import Player
+import pickle
 
 def player_create():
     global player_dic
@@ -189,8 +190,7 @@ def yugioh_card_create(empty_card, name):
 
     return card
 
-player_dic = {}
-latest_id = 0
+
 
 def int_check(num):
     while True:
@@ -245,6 +245,9 @@ def main_menu(user):
                     return
                 elif answ == 5:
                     #Quit button
+                    pickle_out = open("dict.pickle","wb")
+                    pickle.dump(player_dic, pickle_out)
+                    pickle_out.close()
                     print("Goodbye!")
                     exit()
             else:
@@ -252,6 +255,7 @@ def main_menu(user):
                 continue
     
 def add_card(user):
+    global player_dic
     print("\nWhat kind of card would you like to add?")
     print("1. Magic The Gathering")
     print("2. Pokémon")
@@ -307,13 +311,22 @@ def add_card(user):
         answ = int_check(answ)
         if answ in [1,2,3]:
             if answ == 1:
+                pickle_out = open("dict.pickle","wb")
+                pickle.dump(player_dic, pickle_out)
+                pickle_out.close()
                 add_card(user)
                 break
             elif answ == 2:
+                pickle_out = open("dict.pickle","wb")
+                pickle.dump(player_dic, pickle_out)
+                pickle_out.close()
                 return
                 
             elif answ == 3:
                 #Quit button
+                pickle_out = open("dict.pickle","wb")
+                pickle.dump(player_dic, pickle_out)
+                pickle_out.close()
                 print("Goodbye!")
                 exit()
         else:
@@ -361,6 +374,7 @@ def view_collections():
             continue
 
 def loan_card(current_user):  
+    global player_dic
     all_cards_for_loan = []  
     counter = []   
     #Go trough every players loanable cards list and add them into one single list
@@ -393,9 +407,15 @@ def loan_card(current_user):
             all_cards_for_loan[answ-1].set_loaned_yes(current_user)
             player_dic[current_user].add_card_loaned(all_cards_for_loan[answ-1])
             player_dic[all_cards_for_loan[answ-1].get_owner()].get_cards_for_loan().pop(answ-1)
+            pickle_out = open("dict.pickle","wb")
+            pickle.dump(player_dic, pickle_out)
+            pickle_out.close()
             break
         elif answ == 0:
             #returns to main menu
+            pickle_out = open("dict.pickle","wb")
+            pickle.dump(player_dic, pickle_out)
+            pickle_out.close()
             return 
         else:
             print("Please choose a valid option")
@@ -404,17 +424,32 @@ def loan_card(current_user):
 
 def main():
     while True:
-        #On startup
+        global player_dic
+        #Checks if there is a saved state
+        while True:
+            try:
+                pickle_in = open("dict.pickle", "rb")
+                player_dic = pickle.load(pickle_in)
+                if len(player_dic) == 0:
+                    print("No save file found!")
+                    break
+                else:
+                    print("Save file found!")
+                    break
+            except FileNotFoundError:
+                print("No save file found")
+                break
         print("\nGreetings")
-        # * placeholder for instructions later on * 
+        print("You can navigate around by typing the number corresponding the option you want to choose!")
         print("Do you want to create a new player or choose an existing one?")
         print("1. New player")
         print("2. Existing player")
-        print("3. Quit")
+        print("3. Clear current save file")
+        print("4. Quit")
         while True:
             answ = input()
             answ = int_check(answ)
-            if answ in [1,2,3]:
+            if answ in [1,2,3,4]:
                 if answ == 1:
                     player_create()
                     break
@@ -425,21 +460,50 @@ def main():
                     else:
                         break
                 elif answ == 3:
+                    print("Are you sure you want to clear the save file?")
+                    while True:
+                        clear = input().capitalize()
+                        if clear not in ["Yes", "No"]:
+                            print("Please enter yes or no")
+                            continue
+                        else:
+                            if clear == "Yes":
+                                empty_list = {}
+                                pickle_out = open("dict.pickle","wb")
+                                pickle.dump(empty_list, pickle_out)
+                                pickle_out.close()
+                                print("The programm needs to be restarted after clearing the save file")
+                                exit()
+                            elif clear == "No":
+                                print("The save file was not cleared")
+                                break  
+                    print("Do you want to create a new player or choose an existing one?")
+                    print("1. New player")
+                    print("2. Existing player")
+                    print("3. Clear current save file")
+                    print("4. Quit")                 
+                    continue
+                elif answ == 4:
+                    pickle_out = open("dict.pickle","wb")
+                    pickle.dump(player_dic, pickle_out)
+                    pickle_out.close()
                     exit()
             else:
                 print("Please enter an available option")
                 continue
         
+        pickle_out = open("dict.pickle","wb")
+        pickle.dump(player_dic, pickle_out)
+        pickle_out.close()
+
         #User gets to choose which registered player they want to use 
         current_player = player_choose()
         
         #The main menu loop where player can navigate everywhere
         main_menu(current_player)
     
-    
-
-    
-
+player_dic = {}
+latest_id = 0
 main()
 
     
