@@ -217,34 +217,37 @@ def player_choose():
         
 def main_menu(user):
     #The main hub where user can access all the features
-    # *placeholder, this will most likely become a loop*
-    print(f"\nGreetings {user}, what would you like to do?")
-    print("1. Add or remove a card")
-    print("2. Loan a card or add a card up for loaning")
-    print("3. View collections")
-    print("4. Quit")
     while True:
-        answ = input()
-        answ = int_check(answ)
-        if answ in [1,2,3,4]:
-            if answ == 1:
-                #add a card
-                add_card(user)
-                break
-            elif answ == 2:
-                #loan a card
-                break
-            elif answ == 3:
-                #view all card collections
-                view_collections(user)
-                break
-            elif answ == 4:
-                #Quit button
-                print("Goodbye!")
-                exit()
-        else:
-            print("Please enter an available option")
-            continue
+        print(f"\nGreetings {user}, what would you like to do?")
+        print("1. Add or remove a card")
+        print("2. Loan a card or add a card up for loaning")
+        print("3. View collections")
+        print("4. Change player")
+        print("5. Quit")
+        while True:
+            answ = input()
+            answ = int_check(answ)
+            if answ in [1,2,3,4,5]:
+                if answ == 1:
+                    #add a card
+                    add_card(user)
+                    break
+                elif answ == 2:
+                    #loan a card
+                    break
+                elif answ == 3:
+                    #view all card collections
+                    view_collections()
+                    break
+                elif answ == 4:
+                    return
+                elif answ == 5:
+                    #Quit button
+                    print("Goodbye!")
+                    exit()
+            else:
+                print("Please enter an available option")
+                continue
     
 def add_card(user):
     print("\nWhat kind of card would you like to add?")
@@ -290,8 +293,8 @@ def add_card(user):
                 add_card(user)
                 break
             elif answ == 2:
-                main_menu(user)
-                break
+                return
+                
             elif answ == 3:
                 #Quit button
                 print("Goodbye!")
@@ -300,14 +303,16 @@ def add_card(user):
             print("Please enter an available option")
             continue
         
-def view_collections(current_user):
+def view_collections():
     #Choose a player and print out each card in that players owned_cards list
     print("\nWhich player's collection would you like to view?")
     chosen_player = player_choose()
-    
-    print(f"\n{chosen_player}'s card collection: ")
-    for i in player_dic[chosen_player].get_owned_cards():
-        print(i)
+    if len(player_dic[chosen_player].get_owned_cards()) > 0:
+        print(f"\n{chosen_player}'s card collection: ") 
+        for i in player_dic[chosen_player].get_owned_cards():
+            print(i)
+    else:
+        print(f"\n{chosen_player}'s card collection is empty at the moment.")
         
     print("\nWould you like to view another player's collection?")
     print("1. Yes, view another collection")
@@ -321,8 +326,7 @@ def view_collections(current_user):
                 view_collections()
                 break
             elif answ == 2:
-                main_menu(current_user)
-                break
+                return
             elif answ == 3:
                 #Quit button
                 print("Goodbye!")
@@ -333,37 +337,38 @@ def view_collections(current_user):
 
             
 def main():
-    #On startup
-    print("Greetings")
-    # * placeholder for instructions later on * 
-    print("Do you want to create a new player or choose an existing one?")
-    print("1. New player")
-    print("2. Existing player")
-    print("3. Quit")
     while True:
-        answ = input()
-        answ = int_check(answ)
-        if answ in [1,2,3]:
-            if answ == 1:
-                player_create()
-                break
-            elif answ == 2:
-                if len(player_dic) == 0:
-                    print("No existing players, choose another option: ")
-                    continue
-                else:
+        #On startup
+        print("Greetings")
+        # * placeholder for instructions later on * 
+        print("Do you want to create a new player or choose an existing one?")
+        print("1. New player")
+        print("2. Existing player")
+        print("3. Quit")
+        while True:
+            answ = input()
+            answ = int_check(answ)
+            if answ in [1,2,3]:
+                if answ == 1:
+                    player_create()
                     break
-            elif answ == 3:
-                exit()
-        else:
-            print("Please enter an available option")
-            continue
-    
-    #User gets to choose which registered player they want to use 
-    current_player = player_choose()
-    
-    #The main menu loop where player can navigate everywhere
-    main_menu(current_player)
+                elif answ == 2:
+                    if len(player_dic) == 0:
+                        print("No existing players, choose another option: ")
+                        continue
+                    else:
+                        break
+                elif answ == 3:
+                    exit()
+            else:
+                print("Please enter an available option")
+                continue
+        
+        #User gets to choose which registered player they want to use 
+        current_player = player_choose()
+        
+        #The main menu loop where player can navigate everywhere
+        main_menu(current_player)
     
     
 
@@ -372,18 +377,3 @@ def main():
 main()
 
     
-
-                
-
-
-
-
-
-
-
-
-
-
-
-
-
