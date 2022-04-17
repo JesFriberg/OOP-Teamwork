@@ -423,22 +423,24 @@ def loan_card(current_user):
 
 
 def main():
+    global player_dic
+    #Checks if there is a saved state
     while True:
-        global player_dic
-        #Checks if there is a saved state
-        while True:
-            try:
-                pickle_in = open("dict.pickle", "rb")
-                player_dic = pickle.load(pickle_in)
-                if len(player_dic) == 0:
-                    print("No save file found!")
-                    break
-                else:
-                    print("Save file found!")
-                    break
-            except FileNotFoundError:
-                print("No save file found")
+        try:
+            pickle_in = open("dict.pickle", "rb")
+            player_dic = pickle.load(pickle_in)
+            if len(player_dic) == 0:
+                print("No save file found!")
                 break
+            else:
+                print("Save file found!")
+                break
+        except FileNotFoundError:
+            print("No save file found")
+            break
+
+    #The main loop
+    while True:
         print("\nGreetings")
         print("You can navigate around by typing the number corresponding the option you want to choose!")
         print("Do you want to create a new player or choose an existing one?")
@@ -458,6 +460,7 @@ def main():
                         print("No existing players, choose another option: ")
                         continue
                     else:
+                        print("")
                         break
                 elif answ == 3:
                     print("Are you sure you want to clear the save file?")
