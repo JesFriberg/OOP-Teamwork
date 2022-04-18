@@ -22,7 +22,7 @@ def player_create():
 def basic_card_create(card, name):
     card_name = input("\nEnter the name of the card: ").capitalize()
     while True:
-        price = input("Enter the price of the card as an integer: ")
+        price = input("Enter the price of the card as an integer in euros: ")
         try:
             price = int(price)
             break
@@ -42,8 +42,8 @@ def basic_card_create(card, name):
 
 def mtg_card_create(empty_card, name):
     card = basic_card_create(empty_card, name)
-    type_list = ["Land", "Creature", "Artifact", "Enchantment", "Planeswalker", "Insant", "Sorcery"]
-    print("Select the number correspoding the correct card type")
+    type_list = ["Land", "Creature", "Artifact", "Enchantment", "Planeswalker", "Instant", "Sorcery"]
+    print("Select the number corresponding the correct card type")
     print("Land  Creature  Artifact  Enchantment  Planeswalker  Instant  Sorcery")
     print(" 1       2         3           4            5           6         7 ")
     while True:
@@ -81,7 +81,7 @@ def mtg_card_create(empty_card, name):
 def pokemon_card_create(empty_card, name):
     card = basic_card_create(empty_card, name)
     type_list = ["Pokémon", "Energy", "Trainer"]
-    print("Select the number correspoding the correct card type")
+    print("Select the number corresponding the correct card type")
     print("Pokémon   Energy     Trainer")
     print("  1          2          3")
     while True:
@@ -101,7 +101,7 @@ def pokemon_card_create(empty_card, name):
 
     typing_list = ["Grass", "Fire", "Water", "Lightning", "Fighting", 
     "Psychic", "Colorless", "Darkness", "Metal", "Dragon", "Fairy"]
-    print("Select the number correspoding the correct typing for the card")
+    print("Select the number corresponding the correct typing for the card")
     print("Grass    Fire    Water    Lightning    Fighting    Psychic    Colorless    Darkness    Metal    Dragon    Fairy")
     print("  1       2        3          4            5          6           7           8          9        10        11")
     while True:
@@ -121,7 +121,7 @@ def pokemon_card_create(empty_card, name):
 
     if card.get_card_type() == "Pokémon":
         while True:
-            hp = input("Enter the pokémons hp as an integer: ")
+            hp = input("Enter the Pokémons hp as an integer: ")
             try:
                 hp = int(hp)
                 break
@@ -137,7 +137,7 @@ def pokemon_card_create(empty_card, name):
 def yugioh_card_create(empty_card, name):
     card = basic_card_create(empty_card, name)
     type_list = ["Monster", "Spell", "Trap"]
-    print("Select the number correspoding the correct card type")
+    print("Select the number corresponding the correct card type")
     print("Monster   Spell   Trap")
     print("  1         2       3")
     while True:
@@ -157,7 +157,7 @@ def yugioh_card_create(empty_card, name):
 
     rarity_list = ["Common", "Rare", "Super Rare", "Holofoil Rare", "Ultra Rare",
     "Ultimate Rare", "Secret Rare", "Parallel Rare", "Ghost Rare", "Gold Ultra Rare"]
-    print("Select the number correspoding the correct typing for the card")
+    print("Select the number corresponding the correct typing for the card")
     print("Common  Rare  Super Rare  Holofoil Rare  Ultra Rare   Ultimate Rare  Secret Rare  Parallel Rare  Ghost Rare  Gold Ultra Rare")
     print("  1       2       3             4            5              6             7              8           9              10")
     while True:
@@ -377,7 +377,7 @@ def loan_card(current_user):
     global player_dic
     all_cards_for_loan = []  
     counter = []   
-    #Go trough every players loanable cards list and add them into one single list
+    #Go through every players loanable cards list and add them into one single list
     for i in player_dic:
         if player_dic[i].get_name() == current_user:
             continue
@@ -402,7 +402,7 @@ def loan_card(current_user):
         answ = input()
         answ = int_check(answ)
         if answ in counter:
-            #Addes the card to current users loaned cards, removes the card from loanable cards
+            #Adds the card to current users loaned cards, removes the card from loanable cards
             print(f"Adding {all_cards_for_loan[answ-1].get_name()} to your collection...")
             all_cards_for_loan[answ-1].set_loaned_yes(current_user)
             player_dic[current_user].add_card_loaned(all_cards_for_loan[answ-1])
@@ -475,7 +475,7 @@ def main():
                                 pickle_out = open("dict.pickle","wb")
                                 pickle.dump(empty_list, pickle_out)
                                 pickle_out.close()
-                                print("The programm needs to be restarted after clearing the save file")
+                                print("The program needs to be restarted after clearing the save file")
                                 exit()
                             elif clear == "No":
                                 print("The save file was not cleared")
