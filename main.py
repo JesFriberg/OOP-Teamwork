@@ -223,11 +223,12 @@ def main_menu(user):
         print("2. Loan a card or add a card up for loaning")
         print("3. View collections")
         print("4. Change player")
-        print("5. Quit")
+        print("5. Return a loaned card")
+        print("6. Quit")
         while True:
             answ = input()
             answ = int_check(answ)
-            if answ in [1,2,3,4,5]:
+            if answ in [1,2,3,4,5,6]:
                 if answ == 1:
                     #add a card
                     add_card(user)
@@ -244,6 +245,10 @@ def main_menu(user):
                     #returns back to the beginning, allowing the change or creation  of players
                     return
                 elif answ == 5:
+                    #Allows the user to return a loaned card
+                    return_loaned(user)
+                    break
+                elif answ == 6:
                     #Quit button
                     pickle_out = open("dict.pickle","wb")
                     pickle.dump(player_dic, pickle_out)
@@ -410,6 +415,59 @@ def loan_card(current_user):
             pickle_out = open("dict.pickle","wb")
             pickle.dump(player_dic, pickle_out)
             pickle_out.close()
+            break
+        elif answ == 0:
+            #returns to main menu
+            pickle_out = open("dict.pickle","wb")
+            pickle.dump(player_dic, pickle_out)
+            pickle_out.close()
+            return 
+        else:
+            print("Please choose a valid option")
+            continue
+
+def return_loaned(current_user):
+    global player_dic
+    counter = []
+    if len(player_dic[current_user].get_loaned_cards()) == 0:
+        print("\nYou don't have any loaned cards at the moment")
+        print("Returning to main menu...")
+        return
+    else: 
+        print("\nHere are all of your loaned cards: ")
+
+    for count, card in enumerate(player_dic[current_user].get_loaned_cards()):
+        print(f"\nIndex: {count+1} {card}")
+        counter.append(count+1)
+    
+    print("\nWhich card would you like to return to its owner?")
+    print("Choose the corresponding index number for the card you want to return or type 0 to return to main menu: ")
+    while True:
+        answ = input()
+        answ = int_check(answ)
+        if answ in counter:
+            print(f"Removing {player_dic[current_user].get_loaned_cards()[answ-1].get_name()} from your collection...")
+            player_dic[current_user].get_loaned_cards()[answ-1].set_loaned_no()
+            player_dic[current_user].get_loaned_cards()[answ-1].set_up_for_loan("No")
+            player_dic[current_user].get_loaned_cards().pop(answ-1)
+            pickle_out = open("dict.pickle","wb")
+            pickle.dump(player_dic, pickle_out)
+            pickle_out.close()
+            if len(player_dic[current_user].get_loaned_cards()) == 0:
+                print("\nYou don't have any more loaned cards at the moment")
+                print("Returning to main menu...")
+                return
+            else: 
+                print("\nWould you like to return another loaned card? ")
+                while True:
+                    answ = input().capitalize()
+                    if answ not in ["Yes", "No"]:
+                        print("Please enter yes or no")
+                        continue
+                    else:
+                        if answ == "Yes":
+                            return_loaned(current_user)
+                    break
             break
         elif answ == 0:
             #returns to main menu
